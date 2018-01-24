@@ -32,16 +32,46 @@
 		</style>
 	</head>
 	<body>
-		<input type="submit" value="example button that will be disabled" onclick="alert('example')";>
-		<input type="submit" value="start screensaver" onclick="startScreenSaver()";>
+		<br />
+		The screensaver will start automatically after 60 seconds of inactivity or when you push the second button.<br /><br />
+		All the form elements and iframes will be automatically disabled while the screensaver is activated.<br /><br />
+		<br />
+		<input type="submit" value="example button that will be disabled" onclick="alert('example')";><br /><br />
+		<input type="submit" value="start screensaver manually" onclick="startScreenSaver()";>
 		
-		<div id="screenSaver" tabindex="9999" onclick="stopScreenSaver();" onmousemove="stopScreenSaver();" onkeydown="stopScreenSaver();" onkeyup="stopScreenSaver();">
-			<div id="screenSaverText" onclick="stopScreenSaver();" onmousemove="stopScreenSaver();" onkeydown="stopScreenSaver();" onkeyup="stopScreenSaver();">LRusso.com.ar</div>
+		<div id="screenSaver" tabindex="9999" onclick="stopScreenSaver();" onmousemove="stopScreenSaver();" onkeypress="stopScreenSaver();">
+			<div id="screenSaverText" onclick="stopScreenSaver();" onmousemove="stopScreenSaver();" onkeypress="stopScreenSaver();">LRusso.com.ar</div>
 		</div>
 
 		<script>
 		
+			var screenSaverIdleTime = 0;
+			var screenSaverActivateAfterSeconds = 60;
 			var screenSaverStatusEnabled = false;
+			
+			window.onload = function()
+				{
+				var idleInterval = setInterval(screenSaverTimerIncrement, 1000);
+				document.addEventListener("mousemove", screenSaverResetIncrement()); 
+				document.addEventListener("keypress", screenSaverResetIncrement()); 
+				}
+				
+			function screenSaverResetIncrement()
+				{
+				screenSaverIdleTime = 0;
+				}
+
+			function screenSaverTimerIncrement()
+				{
+				screenSaverIdleTime = screenSaverIdleTime + 1;
+				if (screenSaverIdleTime >= screenSaverActivateAfterSeconds)
+					{
+					if (screenSaverStatusEnabled==false)
+						{
+						startScreenSaver();
+						}
+					}
+				}
 			
 			function screenSaverTranslate()
 				{
@@ -73,9 +103,9 @@
 
 				function loop()
 					{
-					if (screensaverStatusEnabled==true)
+					if (screenSaverStatusEnabled==true)
 						{
-						if (i >= count) {translate();return;}
+						if (i >= count) {screenSaverTranslate();return;}
 						
 						i += 1;
 						
@@ -99,14 +129,16 @@
 			
 			function startScreenSaver()
 				{
-				screensaverStatusEnabled = true;
+				screenSaverStatusEnabled = true;
 				document.getElementById("screenSaver").style.display = "block";
+				document.getElementById("screenSaver").focus();
 				screenSaverTranslate();
 				}
 				
 			function stopScreenSaver()
 				{
-				screensaverStatusEnabled = false;
+				screenSaverIdleTime = 0;
+				screenSaverStatusEnabled = false;
 				document.getElementById("screenSaver").style.display = "none";
 				}
 		</script>
