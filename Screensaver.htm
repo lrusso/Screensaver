@@ -1,4 +1,4 @@
-<html>
+<html onmousemove="screenSaverResetIncrement();" onkeypress="screenSaverResetIncrement();">
 	<head>
 		<title>Screensaver</title>
 		<style>
@@ -50,9 +50,7 @@
 
 			window.onload = function()
 				{
-				var idleInterval = setInterval(screenSaverTimerIncrement, 1000);
-				document.addEventListener("mousemove", screenSaverResetIncrement()); 
-				document.addEventListener("keypress", screenSaverResetIncrement()); 
+				setInterval(screenSaverTimerIncrement, 1000);
 				}
 				
 			function screenSaverResetIncrement()
