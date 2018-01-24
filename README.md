@@ -1,2 +1,5 @@
 # ScreenSaver_Javascript
-ScreenSaver in plain JavaScript
+
+Simple Screensaver in plain JavaScript by LRusso.com 
+
+Demo:
