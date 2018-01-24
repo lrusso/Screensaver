@@ -48,6 +48,7 @@
 			var screenSaverActivateAfterSeconds = 60;
 			var screenSaverStatusEnabled = false;
 			var screenSaverLastActiveElement = null;
+			var screenSaverLastTop = null;
 
 			window.onload = function()
 				{
@@ -134,11 +135,16 @@
 					{
 					screenSaverLastActiveElement = document.activeElement;
 					}
+				if (window.self!=null)
+					{
+					screenSaverLastTop = window.pageYOffset;
+					}
 				document.getElementById("screenSaver").style.display = "block";
 				document.getElementById("screenSaver").focus();
+				window.scrollTo(0,0);
 				screenSaverTranslate();
 				}
-				
+
 			function stopScreenSaver()
 				{
 				screenSaverIdleTime = 0;
@@ -148,6 +154,11 @@
 					{
 					screenSaverLastActiveElement.focus();
 					screenSaverLastActiveElement = null;
+					}
+				if (screenSaverLastTop!=null)
+					{
+					window.scrollTo(0,window.screenSaverLastTop);
+					screenSaverLastTop = null;
 					}
 				}
 		</script>
