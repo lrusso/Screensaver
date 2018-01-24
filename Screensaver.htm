@@ -34,7 +34,7 @@
 				}
 		</style>
 	</head>
-	<body>
+	<body id="bodyHTML">
 		The screensaver will start automatically after 60 seconds of inactivity.
 		<div id="screenSaver" tabindex="9999" onclick="stopScreenSaver();" onmousemove="stopScreenSaver();" onkeypress="stopScreenSaver();">
 			<div id="screenSaverText" onclick="stopScreenSaver();" onmousemove="stopScreenSaver();" onkeypress="stopScreenSaver();">LRusso.com.ar</div>
@@ -138,6 +138,7 @@
 					{
 					screenSaverLastTop = window.pageYOffset;
 					}
+				document.getElementById("bodyHTML").style.overflowY = "hidden"; 
 				document.getElementById("screenSaver").style.display = "block";
 				document.getElementById("screenSaver").focus();
 				window.scrollTo(0,0);
@@ -148,6 +149,7 @@
 				{
 				screenSaverIdleTime = 0;
 				screenSaverStatusEnabled = false;
+				document.getElementById("bodyHTML").style.overflowY = "initial"; 
 				document.getElementById("screenSaver").style.display = "none";
 				if (screenSaverLastActiveElement!=null)
 					{
