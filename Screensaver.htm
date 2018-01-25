@@ -35,9 +35,7 @@
 		</style>
 	</head>
 	<body id="bodyHTML">
-		The screensaver will start automatically after 60 seconds of inactivity.<br />
-		<input type="text"><br />
-		<div id="counter"></div>
+		The screensaver will start automatically after 60 seconds of inactivity.
 		<div id="screenSaver" tabindex="9999" onclick="stopScreenSaver();" onmousemove="stopScreenSaver();" onkeypress="stopScreenSaver();" onkeydown="stopScreenSaver();" onkeyup="stopScreenSaver();">
 			<div id="screenSaverText" onclick="stopScreenSaver();" onmousemove="stopScreenSaver();" onkeypress="stopScreenSaver();" onkeydown="stopScreenSaver();" onkeyup="stopScreenSaver();">LRusso.com.ar</div>
 		</div>
@@ -63,13 +61,11 @@
 			function screenSaverResetIncrement()
 				{
 				screenSaverIdleTime = 0;
-				document.getElementById("counter").innerHTML = screenSaverIdleTime;
 				}
 
 			function screenSaverTimerIncrement()
 				{
 				screenSaverIdleTime = screenSaverIdleTime + 1;
-				document.getElementById("counter").innerHTML = screenSaverIdleTime;
 				if (screenSaverIdleTime >= screenSaverActivateAfterSeconds)
 					{
 					if (screenSaverStatusEnabled==false)
