@@ -35,9 +35,11 @@
 		</style>
 	</head>
 	<body id="bodyHTML">
-		The screensaver will start automatically after 60 seconds of inactivity.
-		<div id="screenSaver" tabindex="9999" onclick="stopScreenSaver();" onmousemove="stopScreenSaver();" onkeypress="stopScreenSaver();">
-			<div id="screenSaverText" onclick="stopScreenSaver();" onmousemove="stopScreenSaver();" onkeypress="stopScreenSaver();">LRusso.com.ar</div>
+		The screensaver will start automatically after 60 seconds of inactivity.<br />
+		<input type="text"><br />
+		<div id="counter"></div>
+		<div id="screenSaver" tabindex="9999" onclick="stopScreenSaver();" onmousemove="stopScreenSaver();" onkeypress="stopScreenSaver();" onkeydown="stopScreenSaver();" onkeyup="stopScreenSaver();">
+			<div id="screenSaverText" onclick="stopScreenSaver();" onmousemove="stopScreenSaver();" onkeypress="stopScreenSaver();" onkeydown="stopScreenSaver();" onkeyup="stopScreenSaver();">LRusso.com.ar</div>
 		</div>
 
 		<script>
@@ -54,16 +56,20 @@
 				document.addEventListener("click", screenSaverResetIncrement, false);
 				document.addEventListener("mousemove", screenSaverResetIncrement, false);
 				document.addEventListener("keypress", screenSaverResetIncrement, false);
+				document.addEventListener("keydown", screenSaverResetIncrement, false);
+				document.addEventListener("keyup", screenSaverResetIncrement, false);
 				}
 
 			function screenSaverResetIncrement()
 				{
 				screenSaverIdleTime = 0;
+				document.getElementById("counter").innerHTML = screenSaverIdleTime;
 				}
 
 			function screenSaverTimerIncrement()
 				{
 				screenSaverIdleTime = screenSaverIdleTime + 1;
+				document.getElementById("counter").innerHTML = screenSaverIdleTime;
 				if (screenSaverIdleTime >= screenSaverActivateAfterSeconds)
 					{
 					if (screenSaverStatusEnabled==false)
