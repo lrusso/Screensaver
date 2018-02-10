@@ -75,25 +75,24 @@
 						}
 					}
 				}
-			
+
+			function randomIntFromInterval(min,max)
+				{
+				return Math.floor(Math.random()*(max-min+1)+min);
+				}
+
 			function screenSaverTranslate()
 				{
+				var container = document.getElementById("screenSaver");
 				var elem = document.getElementById("screenSaverText");
 
-				var w = window,
-					d = document,
-					e = d.documentElement,
-					g = d.getElementsByTagName("body")[0],
-					x = w.innerWidth || e.clientWidth || g.clientWidth,
-					y = w.innerHeight || e.clientHeight|| g.clientHeight;
-				
 				var minX = 0;
-				var maxX = x - elem.clientWidth - 5;
-				var minY = 0;
-				var maxY = y - elem.clientHeight - 5;
+				var maxX = container.offsetWidth - elem.offsetWidth - 5;
+				var x = randomIntFromInterval(minX, maxX);
 
-				var x =  Math.floor((Math.random() * maxX) + minX);
-				var y =  Math.floor((Math.random() * maxY) + minY);
+				var minY = 0;
+				var maxY = container.offsetHeight - elem.offsetHeight - 5;
+				var y = randomIntFromInterval(minY, maxY);
 				
 				var left = parseInt(css(elem, "left"), 10);
 				var top = parseInt(css(elem, "top"), 10);
@@ -142,6 +141,8 @@
 					screenSaverLastTop = window.pageYOffset;
 					}
 				document.getElementById("bodyHTML").style.overflowY = "hidden"; 
+				document.getElementById("screenSaverText").style.left = 0;
+				document.getElementById("screenSaverText").style.top = 0;
 				document.getElementById("screenSaver").style.display = "block";
 				document.getElementById("screenSaver").focus();
 				window.scrollTo(0,0);
