@@ -88,9 +88,9 @@
 					y = w.innerHeight || e.clientHeight|| g.clientHeight;
 				
 				var minX = 0;
-				var maxX = x - elem.offsetWidth - 5;
+				var maxX = x - elem.clientWidth - 5;
 				var minY = 0;
-				var maxY = y - elem.offsetHeight - 5;
+				var maxY = y - elem.clientHeight - 5;
 
 				var x =  Math.floor((Math.random() * maxX) + minX);
 				var y =  Math.floor((Math.random() * maxY) + minY);
