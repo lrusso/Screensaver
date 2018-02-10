@@ -93,12 +93,12 @@
 				var minY = 0;
 				var maxY = container.offsetHeight - elem.offsetHeight - 5;
 				var y = randomIntFromInterval(minY, maxY);
-				
+
 				var left = parseInt(css(elem, "left"), 10);
 				var top = parseInt(css(elem, "top"), 10);
 				var dx = left - x;
 				var dy = top - y;
-				
+
 				var i = 1;
 				var delay = 20;
 				var count = 150;
@@ -108,19 +108,19 @@
 					if (screenSaverStatusEnabled==true)
 						{
 						if (i >= count) {screenSaverTranslate();return;}
-						
+
 						i += 1;
-						
+
 						var finalX = left - (dx * i / count);
 						var finalY = top - (dy * i / count);
-						
+
 						elem.style.left = (finalX).toFixed(0) + "px";
 						elem.style.top = (finalY).toFixed(0) + "px";
-						
+
 						setTimeout(loop, delay);
 						}
 					}
-				
+
 				function css(element, property)
 					{
 					return window.getComputedStyle(element, null).getPropertyValue(property);
@@ -128,7 +128,7 @@
 
 				loop();
 				}
-			
+
 			function startScreenSaver()
 				{
 				screenSaverStatusEnabled = true;
