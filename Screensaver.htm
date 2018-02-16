@@ -102,16 +102,16 @@
 				var dy = top - y;
 
 				var i = 1;
-				var delay = 20;
-				var count = 150;
+				var speed = 1.5;
+				var count = 0;
 
 				function loop()
 					{
 					if (screenSaverStatusEnabled==true)
 						{
-						if (i >= count) {screenSaverTranslate();return;}
+						if (i>=count){screenSaverTranslate();return;}
 
-						i += 1;
+						i = i +1;
 
 						var finalX = left - (dx * i / count);
 						var finalY = top - (dy * i / count);
@@ -119,13 +119,23 @@
 						elem.style.left = (finalX).toFixed(0) + "px";
 						elem.style.top = (finalY).toFixed(0) + "px";
 
-						setTimeout(loop, delay);
+						setTimeout(loop, 20);
 						}
 					}
 
 				function css(element, property)
 					{
 					return window.getComputedStyle(element, null).getPropertyValue(property);
+					}
+
+				// CALCULATE HOW MANY COUNTS MUST BE DONE BETWEEN THE ORIGIN AND THE DESTINY
+				if (Math.abs(dx)>Math.abs(dy))
+					{
+					count = parseFloat(Math.abs(dx) / speed).toFixed(0);
+					}
+					else
+					{
+					count = parseFloat(Math.abs(dy) / speed).toFixed(0);
 					}
 
 				loop();
