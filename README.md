@@ -1,8 +1,8 @@
 # Screensaver in Javascript
 
-Simple Screensaver in JavaScript.
+Simple screensaver in JavaScript.
 
-![alt screenshot](https://raw.githubusercontent.com/lrusso/ScreenSaver/master/ScreenSaver.png)
+![alt screenshot](https://raw.githubusercontent.com/lrusso/ScreenSaver/master/Screensaver.png)
 
 ## Web:
 
