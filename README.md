@@ -1,6 +1,6 @@
 # ScreenSaver in Javascript
 
-Simple ScreenSaver in JavaScript by LRusso.com 
+Simple ScreenSaver in JavaScript.
 
 ## Demo
 
