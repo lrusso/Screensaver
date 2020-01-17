@@ -6,4 +6,4 @@ Simple ScreenSaver in JavaScript.
 
 ## Web:
 
-https://lrusso.github.io/ScreenSaver/ScreenSaver.htm
+https://lrusso.github.io/Screensaver/Screensaver.htm
