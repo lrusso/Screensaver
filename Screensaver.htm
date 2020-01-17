@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Screensaver</title>
+		<link rel="icon" sizes="16x16" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAiRJREFUeNqcU81uElEYPfMDU5gijFQzSqImDQsIHUOoC56hcScLkz6AxAVxZ1yZNDHuGlb4Bm58AN6AQlpNTNOk0YW6gYkEkJQZfgbG77vtIG0XRr/kZO6duefc8/2MVCqVHgO4g/+LtrpYLO7WarV3s9nsn5ihUAjlcvkZC0jT6RS7u8/heYvlAUmSIMvyNSiKAl2PYH//NZirzudzmQDXnSCdTl+6hQmGYSCTyaDVaoEv4hgMBmAOc1lA4o3jOOh2u9es2raNZPImLMtCvV4X7y7IDEn2PI+ByWSCXq8nMBwOhVinY6PdtnF6+gWFQgH9voOzMw++r4A5zJUDB5wzP/lDPJ4gwTmlEKZ1EtlsDuPxGInEBu1vIRq9sXSgBg64OL4vkUEVW1sWcrmH5OYXNjcfkP0sms2PWF83RF2A8dKBEGC1cDhCyga1R8Px8Vdsb1vY2Xkkcj46+oyTk29EVoIeBW6FgEjBNG9TJ9iJT+3xcHj4CQcHTXFjJKLT+5BIkyMeXwsEzlPwfR97ey9EGqqqiieDCQz+vlJ5AQ7mSvl8/ikduHe1fZVK5e3qvlqtvrx6hsR/qER+zzcEQdPFyq9isdilw9Rmhdy9OS/in1A7nQ4YQWiaxtOnpVIpKmpUpOS6Ls1AXyOIeQnCNE1IgRAhSdggrOm6/qRYLN5fvanRaHwfjUYfaMnz/JPAY+sFAuwregH1Lz8iV3BEcDjj3wIMADmzKUtvpQSmAAAAAElFTkSuQmCC"/>
+		<style>
+			body{margin:0;padding:0}
+			#screensaver{position:fixed;left:0;right:0;top:0;bottom:0;z-index:9999;cursor:none;display:none;outline:none;background-color:black;-webkit-user-select:none;-moz-user-select:none;user-select:none}
+			#screensaverText{position:fixed;font-family:Arial;font-weight:bold;text-align:center;font-size:72px;color:#316faa;text-shadow:rgb(84,84,84) 2px 2px 2px;cursor:none;outline:none}
+		</style>
+	</head>
+	<body id="bodyHTML">
+		The screensaver will start automatically after 5 seconds of inactivity.
+		<div id="screensaver" tabindex="9999" onclick="stopScreenSaver();" onmousemove="stopScreenSaver();" onkeypress="stopScreenSaver();" onkeydown="stopScreenSaver();" onkeyup="stopScreenSaver();">
+			<div id="screensaverText" onclick="stopScreenSaver();" onmousemove="stopScreenSaver();" onkeypress="stopScreenSaver();" onkeydown="stopScreenSaver();" onkeyup="stopScreenSaver();">LRusso.com</div>
+		</div>
+
+		<script>
+		
+			var screensaverIdleTime = 0;
+			var screensaverActivateAfterSeconds = 5;
+			var screensaverStatusEnabled = false;
+			var screensaverLastActiveElement = null;
+			var screensaverLastTop = null;
+
+			window.onload = function()
+				{
+				setInterval(screensaverTimerIncrement, 1000);
+				document.addEventListener("click", screensaverResetIncrement, false);
+				document.addEventListener("dblclick", screensaverResetIncrement, false);
+				document.addEventListener("mousemove", screensaverResetIncrement, false);
+				document.addEventListener("keypress", screensaverResetIncrement, false);
+				document.addEventListener("keydown", screensaverResetIncrement, false);
+				document.addEventListener("keyup", screensaverResetIncrement, false);
+				}
+
+			function screensaverResetIncrement()
+				{
+				screensaverIdleTime = 0;
+				}
+
+			function screensaverTimerIncrement()
+				{
+				screensaverIdleTime = screensaverIdleTime + 1;
+				if (screensaverIdleTime >= screensaverActivateAfterSeconds)
+					{
+					if (screensaverStatusEnabled==false)
+						{
+						startScreenSaver();
+						}
+					}
+				}
+
+			function randomIntFromInterval(min,max)
+				{
+				return Math.floor(Math.random()*(max-min+1)+min);
+				}
+
+			function screensaverTranslate()
+				{
+				var container = document.getElementById("screensaver");
+				var elem = document.getElementById("screensaverText");
+
+				var minX = 0;
+				var maxX = container.offsetWidth - elem.offsetWidth - 5;
+				var x = randomIntFromInterval(minX, maxX);
+
+				var minY = 0;
+				var maxY = container.offsetHeight - elem.offsetHeight - 5;
+				var y = randomIntFromInterval(minY, maxY);
+
+				var left = parseInt(css(elem, "left"), 10);
+				var top = parseInt(css(elem, "top"), 10);
+				var dx = left - x;
+				var dy = top - y;
+
+				var i = 1;
+				var speed = 1.5;
+				var count = 0;
+
+				function loop()
+					{
+					if (screensaverStatusEnabled==true)
+						{
+						if (i>=count){screensaverTranslate();return;}
+
+						i = i +1;
+
+						var finalX = left - (dx * i / count);
+						var finalY = top - (dy * i / count);
+
+						elem.style.left = (finalX).toFixed(0) + "px";
+						elem.style.top = (finalY).toFixed(0) + "px";
+
+						setTimeout(loop, 20);
+						}
+					}
+
+				function css(element, property)
+					{
+					return window.getComputedStyle(element, null).getPropertyValue(property);
+					}
+
+				// CALCULATE HOW MANY COUNTS MUST BE DONE BETWEEN THE ORIGIN AND THE DESTINY
+				if (Math.abs(dx)>Math.abs(dy))
+					{
+					count = parseFloat(Math.abs(dx) / speed).toFixed(0);
+					}
+					else
+					{
+					count = parseFloat(Math.abs(dy) / speed).toFixed(0);
+					}
+
+				loop();
+				}
+
+			function startScreenSaver()
+				{
+				screensaverStatusEnabled = true;
+				if (document.activeElement!=null)
+					{
+					screensaverLastActiveElement = document.activeElement;
+					}
+				if (window.self!=null)
+					{
+					screensaverLastTop = window.pageYOffset;
+					}
+				document.getElementById("bodyHTML").style.overflowY = "hidden"; 
+				document.getElementById("screensaverText").style.left = 0;
+				document.getElementById("screensaverText").style.top = 0;
+				document.getElementById("screensaver").style.display = "block";
+				document.getElementById("screensaver").focus();
+				window.scrollTo(0,0);
+				screensaverTranslate();
+				}
+
+			function stopScreenSaver()
+				{
+				screensaverIdleTime = 0;
+				screensaverStatusEnabled = false;
+				document.getElementById("bodyHTML").style.overflowY = "initial"; 
+				document.getElementById("screensaver").style.display = "none";
+				if (screensaverLastActiveElement!=null)
+					{
+					screensaverLastActiveElement.focus();
+					screensaverLastActiveElement = null;
+					}
+				if (screensaverLastTop!=null)
+					{
+					window.scrollTo(0,window.screensaverLastTop);
+					screensaverLastTop = null;
+					}
+				}
+		</script>
+	</body>
+</html>
