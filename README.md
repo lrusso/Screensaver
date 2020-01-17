@@ -1,4 +1,4 @@
-# Screensaver in Javascript
+# Screensaver
 
 Simple screensaver in JavaScript.
 
