@@ -16,23 +16,11 @@
 		</div>
 
 		<script>
-		
 			var screensaverIdleTime = 0;
 			var screensaverActivateAfterSeconds = 5;
 			var screensaverStatusEnabled = false;
 			var screensaverLastActiveElement = null;
 			var screensaverLastTop = null;
-
-			window.onload = function()
-				{
-				setInterval(screensaverTimerIncrement, 1000);
-				document.addEventListener("click", screensaverResetIncrement, false);
-				document.addEventListener("dblclick", screensaverResetIncrement, false);
-				document.addEventListener("mousemove", screensaverResetIncrement, false);
-				document.addEventListener("keypress", screensaverResetIncrement, false);
-				document.addEventListener("keydown", screensaverResetIncrement, false);
-				document.addEventListener("keyup", screensaverResetIncrement, false);
-				}
 
 			function screensaverResetIncrement()
 				{
@@ -151,6 +139,17 @@
 					screensaverLastTop = null;
 					}
 				}
+
+			window.addEventListener("load", function()
+				{
+				setInterval(screensaverTimerIncrement, 1000);
+				document.addEventListener("click", screensaverResetIncrement, false);
+				document.addEventListener("dblclick", screensaverResetIncrement, false);
+				document.addEventListener("mousemove", screensaverResetIncrement, false);
+				document.addEventListener("keypress", screensaverResetIncrement, false);
+				document.addEventListener("keydown", screensaverResetIncrement, false);
+				document.addEventListener("keyup", screensaverResetIncrement, false);
+				});
 		</script>
 	</body>
 </html>
