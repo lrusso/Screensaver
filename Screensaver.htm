@@ -137,15 +137,26 @@
 
 			function screensaverAnimation()
 				{
+				// CREATING THE REFERENCES TO THE SCREENSAVER AND THE SCREENSAVER TEXT
 				var container = document.getElementById("screensaver");
 				var elem = document.getElementById("screensaverText");
 
+				// SETTING THE MINIMUM VALUE FOR X WITHIN THE WEB
 				var minX = 0;
+
+				// SETTING THE MAXIMUM VALUE FOR X WITHIN THE WEB
 				var maxX = container.offsetWidth - elem.offsetWidth - 5;
+
+				// GETTING A RANDOM VALUE FOR X BETWEEN THE MINIMUM AND MAXIMUM
 				var x = Math.floor(Math.random()*(maxX-minX+1)+minX);
 
+				// SETTING THE MINIMUM VALUE FOR Y WITHIN THE WEB
 				var minY = 0;
+
+				// SETTING THE MAXIMUM VALUE FOR Y WITHIN THE WEB
 				var maxY = container.offsetHeight - elem.offsetHeight - 5;
+
+				// GETTING A RANDOM VALUE FOR Y BETWEEN THE MINIMUM AND MAXIMUM
 				var y = Math.floor(Math.random()*(maxY-minY+1)+minY);
 
 				var left = parseInt(elem.style.left, 10);
