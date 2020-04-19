@@ -71,8 +71,13 @@
 				// CHECKING IF THERE IS AN ACTIVE ELEMENT
 				if (document.activeElement!=null)
 					{
-					// SETTING THE LAST ACTIVE ELEMENT FOR LATER USE
+					// SETTING THE LAST ACTIVE ELEMENT VARIABLE FOR LATER USE
 					screensaverLastActiveElement = document.activeElement;
+					}
+					else
+					{
+					// CLEARING THE LAST ACTIVE ELEMENT VARIABLE
+					screensaverLastActiveElement = null;
 					}
 
 				// GETTING THE CURRENT PAGE Y SCROLLING
@@ -97,15 +102,28 @@
 
 			function stopScreensaver()
 				{
-				screensaverIdleTime = 0;
+				// UPDATING THE SCREENSAVER STATUS
 				screensaverStatusEnabled = false;
+
+				// RESETTING THE IDLE COUNTER
+				screensaverIdleTime = 0;
+
+				// RESTORING THE Y SCROLLING FROM THE WEBSITE
 				document.getElementsByTagName("BODY")[0].style.overflowY = "initial";
+
+				// HIDDING THE SCREENSAVER
 				document.getElementById("screensaver").style.display = "none";
+
+				// CHECKING IF THERE IS A LAST ACTIVE ELEMENT
 				if (screensaverLastActiveElement!=null)
 					{
-					screensaverLastActiveElement.focus();
+					// FOCUSING THE LAST ACTIVE ELEMENT
+					try{screensaverLastActiveElement.focus()}catch(err){}
+
+					// RESETTING THE LAST ACTIVE ELEMENT VARIABLE
 					screensaverLastActiveElement = null;
 					}
+
 				if (screensaverLastTop!=null)
 					{
 					window.scrollTo(0,window.screensaverLastTop);
