@@ -47,13 +47,57 @@
 			// FUNCTION THAT IT'S CALLED WHEN THE WEBSITE IS IDLE (WITHOUT ANY INTERACTION WITH THE USER)
 			function screensaverTimerIncrement()
 				{
+				// UPDATING THE IDLE COUNTER
 				screensaverIdleTime = screensaverIdleTime + 1;
+
+				// CHECKING IF THE IDLE COUNTER IS GREATER THAN THE AMOUNT OF SECONDS
+				// THAT MUST PASS IN ORDER TO START THE SCREENSAVER.
 				if (screensaverIdleTime >= screensaverActivateAfterSeconds)
 					{
+					// CHECKING IF THE SCREENSAVER IS ENABLED
 					if (screensaverStatusEnabled==false)
 						{
+						// STARTING THE SCREENSAVER
 						startScreensaver();
 						}
+					}
+				}
+
+			function startScreensaver()
+				{
+				screensaverStatusEnabled = true;
+				if (document.activeElement!=null)
+					{
+					screensaverLastActiveElement = document.activeElement;
+					}
+				if (window.self!=null)
+					{
+					screensaverLastTop = window.pageYOffset;
+					}
+				document.getElementById("bodyHTML").style.overflowY = "hidden"; 
+				document.getElementById("screensaverText").style.left = 0;
+				document.getElementById("screensaverText").style.top = 0;
+				document.getElementById("screensaver").style.display = "block";
+				document.getElementById("screensaver").focus();
+				window.scrollTo(0,0);
+				screensaverTranslate();
+				}
+
+			function stopScreensaver()
+				{
+				screensaverIdleTime = 0;
+				screensaverStatusEnabled = false;
+				document.getElementById("bodyHTML").style.overflowY = "initial"; 
+				document.getElementById("screensaver").style.display = "none";
+				if (screensaverLastActiveElement!=null)
+					{
+					screensaverLastActiveElement.focus();
+					screensaverLastActiveElement = null;
+					}
+				if (screensaverLastTop!=null)
+					{
+					window.scrollTo(0,window.screensaverLastTop);
+					screensaverLastTop = null;
 					}
 				}
 
@@ -108,44 +152,6 @@
 					}
 
 				loop();
-				}
-
-			function startScreensaver()
-				{
-				screensaverStatusEnabled = true;
-				if (document.activeElement!=null)
-					{
-					screensaverLastActiveElement = document.activeElement;
-					}
-				if (window.self!=null)
-					{
-					screensaverLastTop = window.pageYOffset;
-					}
-				document.getElementById("bodyHTML").style.overflowY = "hidden"; 
-				document.getElementById("screensaverText").style.left = 0;
-				document.getElementById("screensaverText").style.top = 0;
-				document.getElementById("screensaver").style.display = "block";
-				document.getElementById("screensaver").focus();
-				window.scrollTo(0,0);
-				screensaverTranslate();
-				}
-
-			function stopScreensaver()
-				{
-				screensaverIdleTime = 0;
-				screensaverStatusEnabled = false;
-				document.getElementById("bodyHTML").style.overflowY = "initial"; 
-				document.getElementById("screensaver").style.display = "none";
-				if (screensaverLastActiveElement!=null)
-					{
-					screensaverLastActiveElement.focus();
-					screensaverLastActiveElement = null;
-					}
-				if (screensaverLastTop!=null)
-					{
-					window.scrollTo(0,window.screensaverLastTop);
-					screensaverLastTop = null;
-					}
 				}
 
 			window.addEventListener("load", function()
