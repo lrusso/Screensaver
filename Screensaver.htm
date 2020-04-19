@@ -30,11 +30,16 @@
 			// SETTING THE VARIABLE TO KNOW THE LAST TOP VALUE (Y-SCROLL)
 			var screensaverLastTop = null;
 
+			// FUNCTION THAT IT'S CALLED FOR RESETTING THE IDLE COUNTER WHEN THE USER MOVES THE MOUSE OR PRESSES A KEY
 			function screensaverResetIncrement()
 				{
+				// RESETTING THE IDLE COUNTER
 				screensaverIdleTime = 0;
+
+				// CHECKING IF THE SCREENSAVER IS ENABLED
 				if (screensaverStatusEnabled==true)
 					{
+					// STOPPING THE SCREENSAVER
 					stopScreensaver();
 					}
 				}
@@ -51,11 +56,6 @@
 					}
 				}
 
-			function randomIntFromInterval(min,max)
-				{
-				return Math.floor(Math.random()*(max-min+1)+min);
-				}
-
 			function screensaverTranslate()
 				{
 				var container = document.getElementById("screensaver");
@@ -63,11 +63,11 @@
 
 				var minX = 0;
 				var maxX = container.offsetWidth - elem.offsetWidth - 5;
-				var x = randomIntFromInterval(minX, maxX);
+				var x = Math.floor(Math.random()*(maxX-minX+1)+minX);
 
 				var minY = 0;
 				var maxY = container.offsetHeight - elem.offsetHeight - 5;
-				var y = randomIntFromInterval(minY, maxY);
+				var y = Math.floor(Math.random()*(maxY-minY+1)+minY);
 
 				var left = parseInt(elem.style.left, 10);
 				var top = parseInt(elem.style.top, 10);
@@ -77,6 +77,16 @@
 				var i = 1;
 				var speed = 1.5;
 				var count = 0;
+
+				// CALCULATE HOW MANY COUNTS MUST BE DONE BETWEEN THE ORIGIN AND THE DESTINY
+				if (Math.abs(dx)>Math.abs(dy))
+					{
+					count = parseFloat(Math.abs(dx) / speed).toFixed(0);
+					}
+					else
+					{
+					count = parseFloat(Math.abs(dy) / speed).toFixed(0);
+					}
 
 				function loop()
 					{
@@ -94,16 +104,6 @@
 
 						setTimeout(loop, 20);
 						}
-					}
-
-				// CALCULATE HOW MANY COUNTS MUST BE DONE BETWEEN THE ORIGIN AND THE DESTINY
-				if (Math.abs(dx)>Math.abs(dy))
-					{
-					count = parseFloat(Math.abs(dx) / speed).toFixed(0);
-					}
-					else
-					{
-					count = parseFloat(Math.abs(dy) / speed).toFixed(0);
 					}
 
 				loop();
