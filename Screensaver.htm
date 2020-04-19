@@ -26,7 +26,10 @@
 			function screensaverResetIncrement()
 				{
 				screensaverIdleTime = 0;
-				stopScreenSaver();
+				if (document.getElementById("screensaver").style.display=="block")
+					{
+					stopScreenSaver();
+					}
 				}
 
 			function screensaverTimerIncrement()
