@@ -159,8 +159,12 @@
 				// GETTING A RANDOM VALUE FOR Y BETWEEN THE MINIMUM AND MAXIMUM
 				var y = Math.floor(Math.random()*(maxY-minY+1)+minY);
 
+				// GETTING THE CURRENT LEFT POSITION FOR THE SCREENSAVER TEXT
 				var left = parseInt(elem.style.left, 10);
+
+				// GETTING THE CURRENT TOP POSITION FOR THE SCREENSAVER TEXT
 				var top = parseInt(elem.style.top, 10);
+
 				var dx = left - x;
 				var dy = top - y;
 
