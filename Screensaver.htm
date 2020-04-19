@@ -12,9 +12,7 @@
 	</head>
 	<body id="bodyHTML">
 		The screensaver will start automatically after 5 seconds of inactivity.
-		<div id="screensaver" tabindex="9999">
-			<div id="screensaverText">LRusso.com</div>
-		</div>
+		<div id="screensaver" tabindex="9999"><div id="screensaverText">LRusso.com</div></div>
 
 		<script>
 			var screensaverIdleTime = 0;
@@ -62,8 +60,8 @@
 				var maxY = container.offsetHeight - elem.offsetHeight - 5;
 				var y = randomIntFromInterval(minY, maxY);
 
-				var left = parseInt(css(elem, "left"), 10);
-				var top = parseInt(css(elem, "top"), 10);
+				var left = parseInt(elem.style.left, 10);
+				var top = parseInt(elem.style.top, 10);
 				var dx = left - x;
 				var dy = top - y;
 
@@ -87,11 +85,6 @@
 
 						setTimeout(loop, 20);
 						}
-					}
-
-				function css(element, property)
-					{
-					return window.getComputedStyle(element, null).getPropertyValue(property);
 					}
 
 				// CALCULATE HOW MANY COUNTS MUST BE DONE BETWEEN THE ORIGIN AND THE DESTINY
