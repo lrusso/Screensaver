@@ -171,7 +171,7 @@
 				// GETTING THE DISTANCE BETWEEN THE TOP-ORIGIN POINT AND THE TOP-DESTINY POINT
 				var dy = top - y;
 
-				// SETTING TWO COUNTER FOR LATER USE
+				// CREATING TWO COUNTER FOR LATER USE
 				var movementsToGetToDestiny = 0;
 				var currentMovements = 1;
 
@@ -202,6 +202,7 @@
 							}
 							else
 							{
+							// UPDATING THE CURRENT MOVEMENTS COUNTER
 							currentMovements = currentMovements + 1;
 
 							var finalX = left - (dx * currentMovements / movementsToGetToDestiny);
