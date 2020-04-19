@@ -80,10 +80,10 @@
 					screensaverLastActiveElement = null;
 					}
 
-				// GETTING THE CURRENT PAGE Y SCROLLING
+				// GETTING THE CURRENT PAGE Y-SCROLLING
 				screensaverLastTop = window.pageYOffset;
 
-				// REMOVING THE Y SCROLLING FROM THE WEBSITE
+				// REMOVING THE Y-SCROLLING FROM THE WEBSITE
 				document.getElementsByTagName("BODY")[0].style.overflowY = "hidden";
 
 				// LOCATING THE SCREENSAVER TEXT TO THE TOP-LEFT CORNER
@@ -108,7 +108,7 @@
 				// RESETTING THE IDLE COUNTER
 				screensaverIdleTime = 0;
 
-				// RESTORING THE Y SCROLLING FROM THE WEBSITE
+				// RESTORING THE Y-SCROLLING FROM THE WEBSITE
 				document.getElementsByTagName("BODY")[0].style.overflowY = "initial";
 
 				// HIDDING THE SCREENSAVER
@@ -124,9 +124,13 @@
 					screensaverLastActiveElement = null;
 					}
 
+				// CHECKING THE ORIGINAL Y-SCROLLING THAT THE WEBSITE HAD
 				if (screensaverLastTop!=null)
 					{
-					window.scrollTo(0,window.screensaverLastTop);
+					// RESTORING THE ORIGINAL Y-SCROLLING
+					try{window.scrollTo(0,window.screensaverLastTop)}catch(err){}
+
+					// CLEARING THE LAST Y-SCROLLING VARIABLE
 					screensaverLastTop = null;
 					}
 				}
