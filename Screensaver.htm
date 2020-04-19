@@ -26,9 +26,9 @@
 			function screensaverResetIncrement()
 				{
 				screensaverIdleTime = 0;
-				if (document.getElementById("screensaver").style.display=="block")
+				if (screensaverStatusEnabled==true)
 					{
-					stopScreenSaver();
+					stopScreensaver();
 					}
 				}
 
@@ -39,7 +39,7 @@
 					{
 					if (screensaverStatusEnabled==false)
 						{
-						startScreenSaver();
+						startScreensaver();
 						}
 					}
 				}
@@ -107,7 +107,7 @@
 				loop();
 				}
 
-			function startScreenSaver()
+			function startScreensaver()
 				{
 				screensaverStatusEnabled = true;
 				if (document.activeElement!=null)
@@ -127,7 +127,7 @@
 				screensaverTranslate();
 				}
 
-			function stopScreenSaver()
+			function stopScreensaver()
 				{
 				screensaverIdleTime = 0;
 				screensaverStatusEnabled = false;
