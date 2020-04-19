@@ -15,7 +15,7 @@
 		<div id="screensaver" tabindex="9999"><div id="screensaverText">LRusso.com</div></div>
 
 		<script>
-			// SETTING THE VARIABLE TO KNOW FOR HOW MANY SECONDS THE WEBSITE WAS IDLE (NO INTERACTION WITH THE USER)
+			// SETTING THE VARIABLE TO KNOW FOR HOW MANY SECONDS THE WEBSITE WAS IDLE (WITHOUT ANY INTERACTION WITH THE USER)
 			var screensaverIdleTime = 0;
 
 			// SETTING HOW MANY SECONDS MUST PASS IN ORDER TO THE SCREENSAVER TO BE ACTIVATED
@@ -44,6 +44,7 @@
 					}
 				}
 
+			// FUNCTION THAT IT'S CALLED WHEN THE WEBSITE IS IDLE (WITHOUT ANY INTERACTION WITH THE USER)
 			function screensaverTimerIncrement()
 				{
 				screensaverIdleTime = screensaverIdleTime + 1;
