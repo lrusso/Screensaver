@@ -172,20 +172,20 @@
 				var dy = top - y;
 
 				// SETTING TWO COUNTER FOR LATER USE
-				var count = 0;
-				var i = 1;
+				var movementsToGetToDestiny = 0;
+				var currentMovements = 1;
 
 				// SETTING HOW FAST THE SCREENSAVER TEXT WILL BE MOVING
 				var speed = 1.5;
 
-				// CALCULATING HOW MANY COUNTS MUST BE DONE BETWEEN THE ORIGIN POINT AND THE DESTINY POINT
+				// CALCULATING HOW MANY MOVEMENTS MUST BE DONE BETWEEN THE ORIGIN POINT AND THE DESTINY POINT
 				if (Math.abs(dx)>Math.abs(dy))
 					{
-					count = parseFloat(Math.abs(dx) / speed).toFixed(0);
+					movementsToGetToDestiny = parseFloat(Math.abs(dx) / speed).toFixed(0);
 					}
 					else
 					{
-					count = parseFloat(Math.abs(dy) / speed).toFixed(0);
+					movementsToGetToDestiny = parseFloat(Math.abs(dy) / speed).toFixed(0);
 					}
 
 				// FUNCTION THAT IT'S CALLED FOR MOVING THE SCREENSAVER TEXT
@@ -195,17 +195,17 @@
 					if (screensaverStatusEnabled==true)
 						{
 						// CHECKING IF THE SCREENSAVER TEXT ARRIVED TO THE DESTINY POINT
-						if (i>=count)
+						if (currentMovements>=movementsToGetToDestiny)
 							{
 							// CALLING THE ANIMATION FUNCTION TO GET A NEW DESTINY POINT
 							screensaverAnimation();
 							}
 							else
 							{
-							i = i +1;
+							currentMovements = currentMovements + 1;
 
-							var finalX = left - (dx * i / count);
-							var finalY = top - (dy * i / count);
+							var finalX = left - (dx * currentMovements / movementsToGetToDestiny);
+							var finalY = top - (dy * currentMovements / movementsToGetToDestiny);
 
 							elem.style.left = (finalX).toFixed(0) + "px";
 							elem.style.top = (finalY).toFixed(0) + "px";
