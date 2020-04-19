@@ -10,9 +10,9 @@
 			#screensaverText{position:fixed;font-family:Arial;font-weight:bold;text-align:center;font-size:72px;color:#316faa;text-shadow:rgb(84,84,84) 2px 2px 2px;cursor:none;outline:none}
 		</style>
 	</head>
-	<body id="bodyHTML">
+	<body>
 		The screensaver will start automatically after 5 seconds of inactivity.
-		<div id="screensaver" tabindex="9999"><div id="screensaverText">LRusso.com</div></div>
+		<div id="screensaver"><div id="screensaverText">LRusso.com</div></div>
 
 		<script>
 			// SETTING THE VARIABLE TO KNOW FOR HOW MANY SECONDS THE WEBSITE WAS IDLE (WITHOUT ANY INTERACTION WITH THE USER)
@@ -65,29 +65,41 @@
 
 			function startScreensaver()
 				{
+				// UPDATING THE SCREEN SAVER STATUS
 				screensaverStatusEnabled = true;
+
+				// CHECKING IF THERE IS AN ACTIVE ELEMENT
 				if (document.activeElement!=null)
 					{
+					// SETTING THE LAST ACTIVE ELEMENT FOR LATER USE
 					screensaverLastActiveElement = document.activeElement;
 					}
-				if (window.self!=null)
-					{
-					screensaverLastTop = window.pageYOffset;
-					}
-				document.getElementById("bodyHTML").style.overflowY = "hidden"; 
+
+				// GETTING THE CURRENT PAGE Y SCROLLING
+				screensaverLastTop = window.pageYOffset;
+
+				// REMOVING THE Y SCROLLING FROM THE WEBSITE
+				document.getElementsByTagName("BODY")[0].style.overflowY = "hidden";
+
+				// LOCATING THE SCREENSAVER TEXT TO THE TOP-LEFT CORNER
 				document.getElementById("screensaverText").style.left = 0;
 				document.getElementById("screensaverText").style.top = 0;
+
+				// SHOWING THE SCREENSAVER
 				document.getElementById("screensaver").style.display = "block";
-				document.getElementById("screensaver").focus();
+
+				// SCROLLING TO THE TOP-LEFT CORNER
 				window.scrollTo(0,0);
-				screensaverTranslate();
+
+				// STARTING THE SCREENSAVER ANIMATION
+				screensaverAnimation();
 				}
 
 			function stopScreensaver()
 				{
 				screensaverIdleTime = 0;
 				screensaverStatusEnabled = false;
-				document.getElementById("bodyHTML").style.overflowY = "initial"; 
+				document.getElementsByTagName("BODY")[0].style.overflowY = "initial";
 				document.getElementById("screensaver").style.display = "none";
 				if (screensaverLastActiveElement!=null)
 					{
@@ -101,7 +113,7 @@
 					}
 				}
 
-			function screensaverTranslate()
+			function screensaverAnimation()
 				{
 				var container = document.getElementById("screensaver");
 				var elem = document.getElementById("screensaverText");
@@ -123,7 +135,7 @@
 				var speed = 1.5;
 				var count = 0;
 
-				// CALCULATE HOW MANY COUNTS MUST BE DONE BETWEEN THE ORIGIN AND THE DESTINY
+				// CALCULATING HOW MANY COUNTS MUST BE DONE BETWEEN THE ORIGIN POINT AND THE DESTINY POINT
 				if (Math.abs(dx)>Math.abs(dy))
 					{
 					count = parseFloat(Math.abs(dx) / speed).toFixed(0);
@@ -137,7 +149,7 @@
 					{
 					if (screensaverStatusEnabled==true)
 						{
-						if (i>=count){screensaverTranslate();return;}
+						if (i>=count){screensaverAnimation();return;}
 
 						i = i +1;
 
