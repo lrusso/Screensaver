@@ -300,8 +300,13 @@ function Screensaver(myDelay, myText, myFontFamily, myFontSize, myFontColor, myF
 
 	window.addEventListener("load", function()
 		{
+		// ADDING THE SCREENSAVER LAYOUT
 		addScreensaver();
+
+		// SETTING THE INTERVAL FOR CHECKING THE IDLE COUNTER
 		setInterval(screensaverTimerIncrement, 1000);
+
+		// SETTING ALL THE EVENTS THAT WILL RESET THE IDLE COUNTER
 		document.addEventListener("wheel", screensaverResetIncrement, false);
 		document.addEventListener("click", screensaverResetIncrement, false);
 		document.addEventListener("dblclick", screensaverResetIncrement, false);
