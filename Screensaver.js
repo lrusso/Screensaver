@@ -29,7 +29,8 @@ class Screensaver
 		// SETTING THE VARIABLE TO KNOW THE LAST TOP VALUE (Y-SCROLL)
 		this.screensaverLastTop = null;
 
-		this.start();
+		// STARTING THE SCREENSAVER
+		this.init();
 		}
 
 	setDelay(myDelay)
@@ -105,7 +106,7 @@ class Screensaver
 		return this.myFontShadow;
 		}
 
-	start()
+	init()
 		{
 		// ADDING THE SCREENSAVER LAYOUT
 		this.addScreensaver();
