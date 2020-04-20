@@ -10,10 +10,16 @@ https://lrusso.github.io/Screensaver/Screensaver.htm
 
 ## Using the screensaver:
 
-* Setting a timeout (in seconds) and text
+* Setting a timeout (in seconds) and a text
 
 ```
 Screensaver(60, "LRusso.com");
+```
+
+* Setting a timeout (in seconds) and a image
+
+```
+Screensaver(60, "<img src='https://www.example.com/myImage.jpg'>");
 ```
 
 * Setting a timeout (in seconds), text, font name, size, color and shadow color
