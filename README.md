@@ -8,9 +8,9 @@ Simple screensaver in JavaScript.
 
 https://lrusso.github.io/Screensaver/Screensaver.htm
 
-## Launching the screensaver:
+## Using the screensaver:
 
-* Using the default settings
+* Width the default settings
 
 ```
 Screensaver("LRusso.com");
