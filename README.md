@@ -25,7 +25,7 @@ var myScreensaver = new Screensaver(60, "<img src='https://www.example.com/logo.
 * Setting a timeout (in seconds), text, font name, size, color and shadow color
 
 ```
-var myScreensaver = new Screensaver(60, "LRusso.com", "Arial", "72px", "red", "yellow 10px 10px 10px");
+var myScreensaver = new Screensaver(60, "LRusso.com", "Arial", "72px", "red", "yellow 5px 5px 5px");
 ```
 
 * Setting a timeout (in seconds), text, font name, size and color without a shadow color
