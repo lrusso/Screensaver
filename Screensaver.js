@@ -93,7 +93,7 @@ class Screensaver
 		this.myFontShadow = myFontShadow;
 		if (this.myFontShadow!=null)
 			{
-			this.myScreensaverText.style.textShadow = this.myFontShadow + " 4px 4px 4px";
+			this.myScreensaverText.style.textShadow = this.myFontShadow;
 			}
 			else
 			{
@@ -364,7 +364,7 @@ class Screensaver
 		if(typeof this.myFontShadow === "undefined")
 			{
 			// SETTING THE DEFAULT SHADOW COLOR
-			this.myFontShadow = "#545454";
+			this.myFontShadow = "#545454 4px 4px 4px";
 			}
 
 		// CREATING THE SCREENSAVER BACKGROUND WITH ALL THE PROPERTIES
@@ -392,7 +392,7 @@ class Screensaver
 		// CHECKING IF THE USER DOESN'T WANT A SHADOW COLOR
 		if (this.myFontShadow!=null)
 			{
-			this.myScreensaverText.style.textShadow = this.myFontShadow + " 4px 4px 4px";
+			this.myScreensaverText.style.textShadow = this.myFontShadow;
 			}
 		this.myScreensaverText.style.cursor = "none";
 		this.myScreensaverText.style.outline = "none";
