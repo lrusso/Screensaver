@@ -1,4 +1,4 @@
-function Screensaver(myText,myColor)
+function Screensaver(myText,myFontFamily,myFontSize,myFontColor,myFontShadow)
 	{
 	var myScreensaverBackground = null;
 	var myScreensaverText = null;
@@ -191,12 +191,19 @@ function Screensaver(myText,myColor)
 					// UPDATING THE CURRENT MOVEMENTS COUNTER
 					currentMovements = currentMovements + 1;
 
+					// GETTING THE FINAL X
 					var finalX = left - (dx * currentMovements / movementsToGetToDestiny);
+
+					// GETTING THE FINAL Y
 					var finalY = top - (dy * currentMovements / movementsToGetToDestiny);
 
+					// MOVING SCREENSAVER TEXT TO THE FINAL X
 					elem.style.left = (finalX).toFixed(0) + "px";
+
+					// MOVING SCREENSAVER TEXT TO THE FINAL Y
 					elem.style.top = (finalY).toFixed(0) + "px";
 
+					// WAITING 20 MS FOR THE NEXT MOVEMENT
 					setTimeout(loop, 20);
 					}
 				}
@@ -213,9 +220,24 @@ function Screensaver(myText,myColor)
 			myText = "Screensaver";
 			}
 
-		if(typeof myColor === "undefined")
+		if(typeof myFontFamily === "undefined")
 			{
-			myColor = "#316faa";
+			myFontFamily = "Arial";
+			}
+
+		if(typeof myFontSize === "undefined")
+			{
+			myFontSize = "72px";
+			}
+
+		if(typeof myFontColor === "undefined")
+			{
+			myFontColor = "#316faa";
+			}
+
+		if(typeof myFontShadow === "undefined")
+			{
+			myFontShadow = "#545454";
 			}
 
 		myScreensaverBackground = document.createElement("div");
@@ -233,12 +255,17 @@ function Screensaver(myText,myColor)
 
 		myScreensaverText = document.createElement("div");
 		myScreensaverText.style.position = "fixed";
-		myScreensaverText.style.fontFamily = "Arial";
+		myScreensaverText.style.fontFamily = myFontFamily;
 		myScreensaverText.style.fontWeight = "bold";
 		myScreensaverText.style.textAlign = "center";
-		myScreensaverText.style.fontSize = "72px";
-		myScreensaverText.style.color = myColor;
-		myScreensaverText.style.textShadow = "rgb(84,84,84) 2px 2px 2px";
+		myScreensaverText.style.fontSize = myFontSize;
+		myScreensaverText.style.color = myFontColor;
+
+		if (myFontShadow!=null)
+			{
+			myScreensaverText.style.textShadow = myFontShadow + " 4px 4px 4px";
+			}
+
 		myScreensaverText.style.cursor = "none";
 		myScreensaverText.style.outline = "none";
 		myScreensaverText.innerHTML = myText;
