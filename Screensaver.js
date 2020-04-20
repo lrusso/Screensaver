@@ -1,5 +1,6 @@
 function Screensaver(myDelay, myText, myFontFamily, myFontSize, myFontColor, myFontShadow)
 	{
+	// SETTING TWO VARIABLES FOR LATER USE
 	var myScreensaverBackground = null;
 	var myScreensaverText = null;
 
@@ -7,7 +8,7 @@ function Screensaver(myDelay, myText, myFontFamily, myFontSize, myFontColor, myF
 	var screensaverIdleTime = 0;
 
 	// SETTING HOW MANY SECONDS MUST PASS IN ORDER TO THE SCREENSAVER TO BE ACTIVATED
-	var screensaverActivateAfterSeconds = 5;
+	var screensaverActivateAfterSeconds = 60;
 
 	// SETTING THE SCREENSAVER STATUS
 	var screensaverStatusEnabled = false;
@@ -215,37 +216,45 @@ function Screensaver(myDelay, myText, myFontFamily, myFontSize, myFontColor, myF
 
 	function addScreensaver()
 		{
-		if(typeof myDelay === "undefined")
+		// CHECKING IF A DELAY WAS DEFINED
+		if(typeof myDelay !== "undefined")
 			{
-			screensaverActivateAfterSeconds = 60;
-			}
-			else
-			{
+			// SETTING THE CUSTOM DELAY
 			screensaverActivateAfterSeconds = myDelay;
 			}
 
+		// CHECKING IF A TEXT WASN'T DEFINED
 		if(typeof myText === "undefined")
 			{
+			// SETTING THE DEFAULT TEXT
 			myText = "Screensaver";
 			}
 
+		// CHECKING IF A FONT FAMILY WASN'T DEFINED
 		if(typeof myFontFamily === "undefined")
 			{
+			// SETTING THE DEFAULT FONT FAMILY
 			myFontFamily = "Arial";
 			}
 
+		// CHECKING IF A FONT SIZE WASN'T DEFINED
 		if(typeof myFontSize === "undefined")
 			{
+			// SETTING THE DEFAULT FONT SIZE
 			myFontSize = "72px";
 			}
 
+		// CHECKING IF A FONT COLOR WASN'T DEFINED
 		if(typeof myFontColor === "undefined")
 			{
+			// SETTING THE DEFAULT FONT COLOR
 			myFontColor = "#316faa";
 			}
 
+		// CHECKING IF A SHADOW COLOR WASN'T DEFINED
 		if(typeof myFontShadow === "undefined")
 			{
+			// SETTING THE DEFAULT SHADOW COLOR
 			myFontShadow = "#545454";
 			}
 
