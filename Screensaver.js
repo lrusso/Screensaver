@@ -108,22 +108,26 @@ class Screensaver
 
 	init()
 		{
-		// ADDING THE SCREENSAVER LAYOUT
-		this.addScreensaver();
+		// SETTING THE CURRENT INSTANCE FOR LATER USE
+		var thisScreensaver = this;
 
-		var algo = this;
+		window.addEventListener("load", function()
+			{
+			// ADDING THE SCREENSAVER LAYOUT
+			thisScreensaver.addScreensaver();
 
-		// SETTING THE INTERVAL FOR CHECKING THE IDLE COUNTER
-		setInterval(algo.screensaverTimerIncrement.bind(algo), 1000);
+			// SETTING THE INTERVAL FOR CHECKING THE IDLE COUNTER
+			setInterval(thisScreensaver.screensaverTimerIncrement.bind(thisScreensaver), 1000);
 
-		// SETTING ALL THE EVENTS THAT WILL RESET THE IDLE COUNTER
-		window.addEventListener("wheel", function(){algo.screensaverResetIncrement()});
-		window.addEventListener("click", function(){algo.screensaverResetIncrement()});
-		window.addEventListener("dblclick", function(){algo.screensaverResetIncrement()});
-		window.addEventListener("mousemove", function(){algo.screensaverResetIncrement()});
-		window.addEventListener("keypress", function(){algo.screensaverResetIncrement()});
-		window.addEventListener("keydown", function(){algo.screensaverResetIncrement()});
-		window.addEventListener("keyup", function(){algo.screensaverResetIncrement()});
+			// SETTING ALL THE EVENTS THAT WILL RESET THE IDLE COUNTER
+			window.addEventListener("wheel", function(){thisScreensaver.screensaverResetIncrement()});
+			window.addEventListener("click", function(){thisScreensaver.screensaverResetIncrement()});
+			window.addEventListener("dblclick", function(){thisScreensaver.screensaverResetIncrement()});
+			window.addEventListener("mousemove", function(){thisScreensaver.screensaverResetIncrement()});
+			window.addEventListener("keypress", function(){thisScreensaver.screensaverResetIncrement()});
+			window.addEventListener("keydown", function(){thisScreensaver.screensaverResetIncrement()});
+			window.addEventListener("keyup", function(){thisScreensaver.screensaverResetIncrement()});
+			});
 		}
 
 	screensaverResetIncrement()
@@ -282,19 +286,20 @@ class Screensaver
 			movementsToGetToDestiny = parseFloat(Math.abs(dy) / speed).toFixed(0);
 			}
 
-		var algo = this;
+		// SETTING THE CURRENT INSTANCE FOR LATER USE
+		var thisScreensaver = this;
 
 		// FUNCTION THAT IT'S CALLED FOR MOVING THE SCREENSAVER TEXT
 		function loop()
 			{
 			// CHECKING IF THE SCREENSAVER IS ENABLED
-			if (algo.screensaverStatusEnabled==true)
+			if (thisScreensaver.screensaverStatusEnabled==true)
 				{
 				// CHECKING IF THE SCREENSAVER TEXT ARRIVED TO THE DESTINY POINT
 				if (currentMovements>=movementsToGetToDestiny)
 					{
 					// CALLING THE ANIMATION FUNCTION TO GET A NEW DESTINY POINT
-					algo.screensaverAnimation();
+					thisScreensaver.screensaverAnimation();
 					}
 					else
 					{
