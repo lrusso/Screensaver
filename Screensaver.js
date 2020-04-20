@@ -1,4 +1,4 @@
-function Screensaver(myText,myFontFamily,myFontSize,myFontColor,myFontShadow)
+function Screensaver(myDelay, myText, myFontFamily, myFontSize, myFontColor, myFontShadow)
 	{
 	var myScreensaverBackground = null;
 	var myScreensaverText = null;
@@ -215,6 +215,15 @@ function Screensaver(myText,myFontFamily,myFontSize,myFontColor,myFontShadow)
 
 	function addScreensaver()
 		{
+		if(typeof myDelay === "undefined")
+			{
+			screensaverActivateAfterSeconds = 60;
+			}
+			else
+			{
+			screensaverActivateAfterSeconds = myDelay;
+			}
+
 		if(typeof myText === "undefined")
 			{
 			myText = "Screensaver";
