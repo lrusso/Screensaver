@@ -25,7 +25,7 @@ var myScreensaver = new Screensaver(60, "<img src='https://www.example.com/logo.
 * Setting a timeout (in seconds), text, font name, size, color and shadow color
 
 ```
-var myScreensaver = new Screensaver(60, "LRusso.com", "Arial", "72px", "red", "yellow");
+var myScreensaver = new Screensaver(60, "LRusso.com", "Arial", "72px", "red", "yellow 10px 10px 10px");
 ```
 
 * Setting a timeout (in seconds), text, font name, size and color without a shadow color
@@ -42,6 +42,6 @@ myScreensaver.setText("Lorem Ipsum");
 myScreensaver.setFontFamily("Times New Roman");
 myScreensaver.setFontSize("24px");
 myScreensaver.setFontColor("red");
-myScreensaver.setFontShadow("yellow");
+myScreensaver.setFontShadow("yellow 10px 10px 10px");
 ```
 
