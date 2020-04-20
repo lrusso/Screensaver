@@ -29,7 +29,7 @@ class Screensaver
 		// SETTING THE VARIABLE TO KNOW THE LAST TOP VALUE (Y-SCROLL)
 		this.screensaverLastTop = null;
 
-		// STARTING THE SCREENSAVER
+		// INITIALIZING THE SCREENSAVER
 		this.init();
 		}
 
