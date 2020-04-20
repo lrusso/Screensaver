@@ -34,4 +34,14 @@ var myScreensaver = new Screensaver(60, "LRusso.com", "Arial", "72px", "red", "y
 var myScreensaver = new Screensaver(60, "LRusso.com", "Arial", "72px", "red", null);
 ```
 
+## Updating the screensaver:
+
+```
+myScreensaver.setDelay(30);
+myScreensaver.setText("Lorem Ipsum");
+myScreensaver.setFontFamily("Arial");
+myScreensaver.setFontSize("24px");
+myScreensaver.setFontColor("red");
+myScreensaver.setFontShadow("yellow");
+```
 
