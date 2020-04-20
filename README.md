@@ -7,3 +7,25 @@ Simple screensaver in JavaScript.
 ## Web:
 
 https://lrusso.github.io/Screensaver/Screensaver.htm
+
+## Launching the screensaver:
+
+* Using the default settings
+
+```
+Screensaver("LRusso.com");
+```
+
+* Setting a font name, size, color and shadow color
+
+```
+Screensaver("LRusso.com", "Arial", "72px", "red", "yellow");
+```
+
+* Setting a font name, size and color without a shadow color
+
+```
+Screensaver("LRusso.com", "Arial", "72px", "red", null);
+```
+
+
