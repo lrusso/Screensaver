@@ -258,6 +258,7 @@ function Screensaver(myDelay, myText, myFontFamily, myFontSize, myFontColor, myF
 			myFontShadow = "#545454";
 			}
 
+		// CREATING THE SCREENSAVER BACKGROUND WITH ALL THE PROPERTIES
 		myScreensaverBackground = document.createElement("div");
 		myScreensaverBackground.style.position = "fixed";
 		myScreensaverBackground.style.left = 0;
@@ -271,6 +272,7 @@ function Screensaver(myDelay, myText, myFontFamily, myFontSize, myFontColor, myF
 		myScreensaverBackground.style.backgroundColor = "black";
 		myScreensaverBackground.style.userSelect = "none";
 
+		// CREATING THE SCREENSAVER TEXT WITH ALL THE PROPERTIES
 		myScreensaverText = document.createElement("div");
 		myScreensaverText.style.position = "fixed";
 		myScreensaverText.style.fontFamily = myFontFamily;
@@ -278,18 +280,21 @@ function Screensaver(myDelay, myText, myFontFamily, myFontSize, myFontColor, myF
 		myScreensaverText.style.textAlign = "center";
 		myScreensaverText.style.fontSize = myFontSize;
 		myScreensaverText.style.color = myFontColor;
-
+		// CHECKING IF THE USER DOESN'T WANT A SHADOW COLOR
 		if (myFontShadow!=null)
 			{
 			myScreensaverText.style.textShadow = myFontShadow + " 4px 4px 4px";
 			}
-
 		myScreensaverText.style.cursor = "none";
 		myScreensaverText.style.outline = "none";
+
+		// SETTING THE SCREENSAVER TEXT
 		myScreensaverText.innerHTML = myText;
 
+		// ADDING THE SCREENSAVER TEXT TO THE SCREENSAVER BACKGROUND
 		myScreensaverBackground.appendChild(myScreensaverText);
 
+		// ADDING THE SCREENSAVER BACKGROUND TO THE WEBSITE
 		document.getElementsByTagName("BODY")[0].appendChild(myScreensaverBackground);
 		}
 
