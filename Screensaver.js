@@ -28,6 +28,8 @@ class Screensaver
 
 		// SETTING THE VARIABLE TO KNOW THE LAST TOP VALUE (Y-SCROLL)
 		this.screensaverLastTop = null;
+
+		this.start();
 		}
 
 	setDelay(myDelay)
