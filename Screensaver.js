@@ -111,23 +111,20 @@ class Screensaver
 		// SETTING THE CURRENT INSTANCE FOR LATER USE
 		var thisScreensaver = this;
 
-		window.addEventListener("load", function()
-			{
-			// ADDING THE SCREENSAVER LAYOUT
-			thisScreensaver.addScreensaver();
+		// ADDING THE SCREENSAVER LAYOUT
+		thisScreensaver.addScreensaver();
 
-			// SETTING THE INTERVAL FOR CHECKING THE IDLE COUNTER
-			setInterval(thisScreensaver.screensaverTimerIncrement.bind(thisScreensaver), 1000);
+		// SETTING THE INTERVAL FOR CHECKING THE IDLE COUNTER
+		setInterval(thisScreensaver.screensaverTimerIncrement.bind(thisScreensaver), 1000);
 
-			// SETTING ALL THE EVENTS THAT WILL RESET THE IDLE COUNTER
-			window.addEventListener("wheel", function(){thisScreensaver.screensaverResetIncrement()});
-			window.addEventListener("click", function(){thisScreensaver.screensaverResetIncrement()});
-			window.addEventListener("dblclick", function(){thisScreensaver.screensaverResetIncrement()});
-			window.addEventListener("mousemove", function(){thisScreensaver.screensaverResetIncrement()});
-			window.addEventListener("keypress", function(){thisScreensaver.screensaverResetIncrement()});
-			window.addEventListener("keydown", function(){thisScreensaver.screensaverResetIncrement()});
-			window.addEventListener("keyup", function(){thisScreensaver.screensaverResetIncrement()});
-			});
+		// SETTING ALL THE EVENTS THAT WILL RESET THE IDLE COUNTER
+		window.addEventListener("wheel", function(){thisScreensaver.screensaverResetIncrement()});
+		window.addEventListener("click", function(){thisScreensaver.screensaverResetIncrement()});
+		window.addEventListener("dblclick", function(){thisScreensaver.screensaverResetIncrement()});
+		window.addEventListener("mousemove", function(){thisScreensaver.screensaverResetIncrement()});
+		window.addEventListener("keypress", function(){thisScreensaver.screensaverResetIncrement()});
+		window.addEventListener("keydown", function(){thisScreensaver.screensaverResetIncrement()});
+		window.addEventListener("keyup", function(){thisScreensaver.screensaverResetIncrement()});
 		}
 
 	screensaverResetIncrement()
