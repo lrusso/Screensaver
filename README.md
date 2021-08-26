@@ -44,4 +44,3 @@ myScreensaver.setFontSize("24px");
 myScreensaver.setFontColor("red");
 myScreensaver.setFontShadow("green 10px 10px 10px");
 ```
-
