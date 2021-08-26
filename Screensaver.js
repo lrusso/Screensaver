@@ -125,6 +125,7 @@ class Screensaver
 		window.addEventListener("keypress", function(){thisScreensaver.screensaverResetIncrement()});
 		window.addEventListener("keydown", function(){thisScreensaver.screensaverResetIncrement()});
 		window.addEventListener("keyup", function(){thisScreensaver.screensaverResetIncrement()});
+		window.addEventListener("touchend", function(){thisScreensaver.screensaverResetIncrement()});
 		}
 
 	screensaverResetIncrement()
