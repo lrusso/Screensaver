@@ -4,11 +4,15 @@ Simple screensaver in JavaScript.
 
 ![alt screenshot](https://raw.githubusercontent.com/lrusso/Screensaver/master/Screensaver.png)
 
-## Web:
+## Vanilla JavaScript version:
 
 https://lrusso.github.io/Screensaver/Screensaver.htm
 
-## Using the screensaver:
+## React version:
+
+https://github.com/lrusso/Screensaver/blob/master/react/Screensaver.js
+
+## Using the screensaver (Vanilla JavaScript version):
 
 * Setting a timeout (in seconds) and a text
 
