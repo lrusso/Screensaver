@@ -12,13 +12,26 @@ https://lrusso.github.io/Screensaver/Screensaver.htm
 
 https://github.com/lrusso/Screensaver/blob/master/react/Screensaver.js
 
-## Using the screensaver (Vanilla JavaScript version):
+## Using the screensaver - Vanilla JavaScript version:
 
 ```
 const myScreensaver = new Screensaver({
-  secondsInactive: 5,
-  speed: 1.5,
+  secondsInactive: 300,
+  speed: 2,
   logo: "logo.png",
   disabledWhenUsingIframes: true,
 });
+```
+
+## Using the screensaver - Vanilla JavaScript version:
+
+```
+return (
+        <Screensaver
+              secondsInactive={300}
+              speed={2}
+              logo={ScreensaverImage}
+              disabledWhenUsingIframes
+              />
+        )
 ```
