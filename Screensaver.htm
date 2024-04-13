@@ -9,7 +9,12 @@
 		The screensaver will start automatically after 5 seconds of inactivity.
 		<script src="Screensaver.js"></script>
 		<script>
-			var myScreensaver = new Screensaver(5, "LRusso.com");
+			var myScreensaver = new Screensaver({
+				secondsInactive: 5,
+				speed: 1.5,
+				logo: "logo.png",
+				disabledWhenUsingIframes: true,
+			});
 		</script>
 	</body>
 </html>

@@ -1,159 +1,78 @@
 class Screensaver
 	{
-	constructor(myDelay, myText, myFontFamily, myFontSize, myFontColor, myFontShadow)
+	constructor({secondsInactive, speed, logo, disabledWhenUsingIframes})
 		{
-		// SETTING THE SCREENSAVER PROPERTIES
-		this.myDelay = myDelay;
-		this.myText = myText;
-		this.myFontFamily = myFontFamily;
-		this.myFontSize = myFontSize;
-		this.myFontColor = myFontColor;
-		this.myFontShadow = myFontShadow;
+		this.secondsInactive = secondsInactive;
+		this.speed = speed;
+		this.logo = logo;
+		this.disabledWhenUsingIframes = disabledWhenUsingIframes;
+		this.container = null;
+		this.imgX = 0;
+		this.imgY = 0;
+		this.imgWidth = 0;
+		this.imgHeight = 0;
+		this.idleCounter = 0;
+		this.movingDown = true;
+		this.enabled = false;
 
-		// SETTING TWO VARIABLES FOR LATER USE
-		this.myScreensaverBackground = null;
-		this.myScreensaverText = null;
-
-		// SETTING THE VARIABLE TO KNOW FOR HOW MANY SECONDS THE WEBSITE WAS IDLE (WITHOUT ANY INTERACTION WITH THE USER)
-		this.screensaverIdleTime = 0;
-
-		// SETTING HOW MANY SECONDS MUST PASS IN ORDER TO THE SCREENSAVER TO BE ACTIVATED
-		this.screensaverActivateAfterSeconds = 60;
-
-		// SETTING THE SCREENSAVER STATUS
-		this.screensaverStatusEnabled = false;
-
-		// SETTING THE VARIABLE TO KNOW THE LAST ACTIVE ELEMENT
-		this.screensaverLastActiveElement = null;
-
-		// SETTING THE VARIABLE TO KNOW THE LAST TOP VALUE (Y-SCROLL)
-		this.screensaverLastTop = null;
-
-		// INITIALIZING THE SCREENSAVER
-		this.init();
-		}
-
-	setDelay(myDelay)
-		{
-		this.myDelay = myDelay;
-		this.screensaverActivateAfterSeconds = myDelay;
-		}
-
-	getDelay()
-		{
-		return this.myDelay;
-		}
-
-	setText(myText)
-		{
-		this.myText = myText;
-		this.myScreensaverText.innerHTML = myText;
-		}
-
-	getText()
-		{
-		return this.myText;
-		}
-
-	setFontFamily(myFontFamily)
-		{
-		this.myFontFamily = myFontFamily;
-		this.myScreensaverText.style.fontFamily = myFontFamily;
-		}
-
-	getFontFamily()
-		{
-		return this.myFontFamily;
-		}
-
-	setFontSize(myFontSize)
-		{
-		this.myFontSize = myFontSize;
-		this.myScreensaverText.style.fontSize = myFontSize;
-		}
-
-	getFontSize()
-		{
-		return this.myFontSize;
-		}
-
-	setFontColor(myFontColor)
-		{
-		this.myFontColor = myFontColor;
-		this.myScreensaverText.style.color = myFontColor;
-		}
-
-	getFontColor()
-		{
-		return this.myFontColor;
-		}
-
-	setFontShadow(myFontShadow)
-		{
-		this.myFontShadow = myFontShadow;
-		if (this.myFontShadow!=null)
+		const _this = this;
+		const tmpImg = document.createElement("img");
+		tmpImg.src = logo;
+		tmpImg.onload = function ()
 			{
-			this.myScreensaverText.style.textShadow = this.myFontShadow;
+			_this.imgWidth = tmpImg.width;
+			_this.imgHeight = tmpImg.height;
+			_this.init();
 			}
-			else
-			{
-			this.myScreensaverText.style.textShadow = "black 0px 0px 0px";
-			}
-		}
-
-	getFontShadow()
-		{
-		return this.myFontShadow;
 		}
 
 	init()
 		{
-		// SETTING THE CURRENT INSTANCE FOR LATER USE
-		var thisScreensaver = this;
+		this.container = document.createElement("div");
+		this.container.style.position = "fixed";
+		this.container.style.left = 0;
+		this.container.style.right = 0;
+		this.container.style.top = 0;
+		this.container.style.bottom = 0;
+		this.container.style.zIndex = 9999;
+		this.container.style.cursor = "none";
+		this.container.style.display = "none";
+		this.container.style.outline = "none";
+		this.container.style.backgroundColor = "black";
+		this.container.style.userSelect = "none";
+		this.container.style.backgroundImage = `url(${this.logo})`
+		this.container.style.backgroundRepeat = "no-repeat";
+		document.getElementsByTagName("BODY")[0].appendChild(this.container);
 
-		// ADDING THE SCREENSAVER LAYOUT
-		thisScreensaver.addScreensaver();
+		const _this = this;
+		setInterval(_this.updateCounter.bind(_this), 1000);
 
-		// SETTING THE INTERVAL FOR CHECKING THE IDLE COUNTER
-		setInterval(thisScreensaver.screensaverTimerIncrement.bind(thisScreensaver), 1000);
-
-		// SETTING ALL THE EVENTS THAT WILL RESET THE IDLE COUNTER
-		window.addEventListener("wheel", function(){thisScreensaver.screensaverResetIncrement()});
-		window.addEventListener("click", function(){thisScreensaver.screensaverResetIncrement()});
-		window.addEventListener("dblclick", function(){thisScreensaver.screensaverResetIncrement()});
-		window.addEventListener("mousemove", function(){thisScreensaver.screensaverResetIncrement()});
-		window.addEventListener("keypress", function(){thisScreensaver.screensaverResetIncrement()});
-		window.addEventListener("keydown", function(){thisScreensaver.screensaverResetIncrement()});
-		window.addEventListener("keyup", function(){thisScreensaver.screensaverResetIncrement()});
-		window.addEventListener("touchstart", function(){thisScreensaver.screensaverResetIncrement()});
+		window.addEventListener("click", function(){_this.stop()});
+		window.addEventListener("dblclick", function(){_this.stop()});
+		window.addEventListener("mouseup", function(){_this.stop()});
+		window.addEventListener("mousemove", function(){_this.stop()});
+		window.addEventListener("wheel", function(){_this.stop()});
+		window.addEventListener("keypress", function(){_this.stop()});
+		window.addEventListener("keydown", function(){_this.stop()});
+		window.addEventListener("keyup", function(){_this.stop()});
+		window.addEventListener("touchstart", function(){_this.stop()});
 		}
 
-	screensaverResetIncrement()
+	updateCounter()
 		{
-		// RESETTING THE IDLE COUNTER
-		this.screensaverIdleTime = 0;
+		const hasIframe = document.getElementsByTagName("iframe")[0] ? true : false
 
-		// CHECKING IF THE SCREENSAVER IS ENABLED
-		if (this.screensaverStatusEnabled==true)
+		if (this.disabledWhenUsingIframes && hasIframe)
 			{
-			// STOPPING THE SCREENSAVER
-			this.stopScreensaver();
+			return
 			}
-		}
 
-	screensaverTimerIncrement()
-		{
-		// UPDATING THE IDLE COUNTER
-		this.screensaverIdleTime = this.screensaverIdleTime + 1;
+		this.idleCounter = this.idleCounter + 1;
 
-		// CHECKING IF THE IDLE COUNTER IS GREATER THAN THE AMOUNT OF SECONDS
-		// THAT MUST PASS IN ORDER TO START THE SCREENSAVER.
-		if (this.screensaverIdleTime >= this.screensaverActivateAfterSeconds)
+		if (this.idleCounter >= this.secondsInactive)
 			{
-			// CHECKING IF THE SCREENSAVER IS ENABLED
-			if (this.screensaverStatusEnabled==false)
+			if (!this.enabled)
 				{
-				// STARTING THE SCREENSAVER
 				this.startScreensaver();
 				}
 			}
@@ -161,252 +80,66 @@ class Screensaver
 
 	startScreensaver()
 		{
-		// UPDATING THE SCREEN SAVER STATUS
-		this.screensaverStatusEnabled = true;
+		this.enabled = true;
 
-		// CHECKING IF THERE IS AN ACTIVE ELEMENT
-		if (document.activeElement!=null)
-			{
-			// SETTING THE LAST ACTIVE ELEMENT VARIABLE FOR LATER USE
-			this.screensaverLastActiveElement = document.activeElement;
-			}
-			else
-			{
-			// CLEARING THE LAST ACTIVE ELEMENT VARIABLE
-			this.screensaverLastActiveElement = null;
-			}
+		this.imgX = 0;
+		this.imgY = 0;
 
-		// GETTING THE CURRENT PAGE Y-SCROLLING
-		this.screensaverLastTop = window.pageYOffset;
-
-		// REMOVING THE Y-SCROLLING FROM THE WEBSITE
 		document.getElementsByTagName("BODY")[0].style.overflowY = "hidden";
 
-		// LOCATING THE SCREENSAVER TEXT TO THE TOP-LEFT CORNER
-		this.myScreensaverText.style.left = 0;
-		this.myScreensaverText.style.top = 0;
+		this.container.style.display = "block";
 
-		// SHOWING THE SCREENSAVER
-		this.myScreensaverBackground.style.display = "block";
-
-		// SCROLLING TO THE TOP-LEFT CORNER
 		window.scrollTo(0,0);
 
-		// STARTING THE SCREENSAVER ANIMATION
-		this.screensaverAnimation();
+		this.animate();
 		}
 
-	stopScreensaver()
+	stop()
 		{
-		// UPDATING THE SCREENSAVER STATUS
-		this.screensaverStatusEnabled = false;
+		this.enabled = false;
 
-		// RESETTING THE IDLE COUNTER
-		this.screensaverIdleTime = 0;
+		this.idleCounter = 0;
 
-		// RESTORING THE Y-SCROLLING FROM THE WEBSITE
 		document.getElementsByTagName("BODY")[0].style.overflowY = "initial";
 
-		// HIDING THE SCREENSAVER
-		this.myScreensaverBackground.style.display = "none";
-
-		// CHECKING IF THERE IS A LAST ACTIVE ELEMENT
-		if (this.screensaverLastActiveElement!=null)
-			{
-			// FOCUSING THE LAST ACTIVE ELEMENT
-			try{this.screensaverLastActiveElement.focus()}catch(err){}
-
-			// RESETTING THE LAST ACTIVE ELEMENT VARIABLE
-			this.screensaverLastActiveElement = null;
-			}
-
-		// CHECKING THE ORIGINAL Y-SCROLLING THAT THE WEBSITE HAD
-		if (this.screensaverLastTop!=null)
-			{
-			// RESTORING THE ORIGINAL Y-SCROLLING
-			try{window.scrollTo(0,window.this.screensaverLastTop)}catch(err){}
-
-			// CLEARING THE LAST Y-SCROLLING VARIABLE
-			this.screensaverLastTop = null;
-			}
+		this.container.style.display = "none";
 		}
 
-	screensaverAnimation()
+	animate()
 		{
-		// CREATING THE REFERENCES TO THE SCREENSAVER AND THE SCREENSAVER TEXT
-		var container = this.myScreensaverBackground;
-		var elem = this.myScreensaverText;
+		const _this = this;
 
-		// SETTING THE MINIMUM VALUE FOR X WITHIN THE WEB
-		var minX = 0;
-
-		// SETTING THE MAXIMUM VALUE FOR X WITHIN THE WEB
-		var maxX = container.offsetWidth - elem.offsetWidth - 5;
-
-		// GETTING A RANDOM VALUE FOR X BETWEEN THE MINIMUM AND MAXIMUM
-		var x = Math.floor(Math.random()*(maxX-minX+1)+minX);
-
-		// SETTING THE MINIMUM VALUE FOR Y WITHIN THE WEB
-		var minY = 0;
-
-		// SETTING THE MAXIMUM VALUE FOR Y WITHIN THE WEB
-		var maxY = container.offsetHeight - elem.offsetHeight - 5;
-
-		// GETTING A RANDOM VALUE FOR Y BETWEEN THE MINIMUM AND MAXIMUM
-		var y = Math.floor(Math.random()*(maxY-minY+1)+minY);
-
-		// GETTING THE CURRENT LEFT POSITION FOR THE SCREENSAVER TEXT
-		var left = parseInt(elem.style.left, 10);
-
-		// GETTING THE CURRENT TOP POSITION FOR THE SCREENSAVER TEXT
-		var top = parseInt(elem.style.top, 10);
-
-		// GETTING THE DISTANCE BETWEEN THE LEFT-ORIGIN POINT AND THE LEFT-DESTINY POINT
-		var dx = left - x;
-
-		// GETTING THE DISTANCE BETWEEN THE TOP-ORIGIN POINT AND THE TOP-DESTINY POINT
-		var dy = top - y;
-
-		// CREATING TWO COUNTERS FOR LATER USE
-		var movementsToGetToDestiny = 0;
-		var currentMovements = 1;
-
-		// SETTING HOW FAST THE SCREENSAVER TEXT WILL BE MOVING
-		var speed = 1.5;
-
-		// CALCULATING HOW MANY MOVEMENTS MUST BE DONE BETWEEN THE ORIGIN POINT AND THE DESTINY POINT
-		if (Math.abs(dx)>Math.abs(dy))
-			{
-			movementsToGetToDestiny = parseFloat(Math.abs(dx) / speed).toFixed(0);
-			}
-			else
-			{
-			movementsToGetToDestiny = parseFloat(Math.abs(dy) / speed).toFixed(0);
-			}
-
-		// SETTING THE CURRENT INSTANCE FOR LATER USE
-		var thisScreensaver = this;
-
-		// FUNCTION THAT IT'S CALLED FOR MOVING THE SCREENSAVER TEXT
 		function loop()
 			{
-			// CHECKING IF THE SCREENSAVER IS ENABLED
-			if (thisScreensaver.screensaverStatusEnabled==true)
+			if (_this.enabled)
 				{
-				// CHECKING IF THE SCREENSAVER TEXT ARRIVED TO THE DESTINY POINT
-				if (currentMovements>=movementsToGetToDestiny)
+				_this.imgX = _this.imgX + _this.speed;
+				_this.imgY = _this.movingDown ? _this.imgY + _this.speed : _this.imgY - _this.speed;
+
+				_this.container.style.backgroundPositionX = (_this.imgX).toFixed(0) + "px";
+				_this.container.style.backgroundPositionY = (_this.imgY).toFixed(0) + "px";
+
+				if (_this.imgY > _this.container.offsetHeight - _this.imgHeight)
 					{
-					// CALLING THE ANIMATION FUNCTION TO GET A NEW DESTINY POINT
-					thisScreensaver.screensaverAnimation();
+					_this.movingDown = false;
 					}
-					else
+				
+				if (_this.imgY < 0)
 					{
-					// UPDATING THE CURRENT MOVEMENTS COUNTER
-					currentMovements = currentMovements + 1;
-
-					// GETTING THE FINAL X
-					var finalX = left - (dx * currentMovements / movementsToGetToDestiny);
-
-					// GETTING THE FINAL Y
-					var finalY = top - (dy * currentMovements / movementsToGetToDestiny);
-
-					// MOVING SCREENSAVER TEXT TO THE FINAL X
-					elem.style.left = (finalX).toFixed(0) + "px";
-
-					// MOVING SCREENSAVER TEXT TO THE FINAL Y
-					elem.style.top = (finalY).toFixed(0) + "px";
-
-					// WAITING 20 MS FOR THE NEXT MOVEMENT
-					setTimeout(loop, 20);
+					_this.movingDown = true;
 					}
+
+				if (_this.imgX > _this.container.offsetWidth)
+					{
+					_this.imgX = -_this.imgWidth;
+					_this.imgY = parseInt(Math.random() * _this.container.offsetHeight - _this.imgHeight);
+					_this.movingDown = true;
+					}
+
+				setTimeout(loop, 20);
 				}
 			}
 
-		// RUNNING THE SCREENSAVER LOOP
 		loop();
-		}
-
-	addScreensaver()
-		{
-		// CHECKING IF A DELAY WAS DEFINED
-		if(typeof this.myDelay !== "undefined")
-			{
-			// SETTING THE CUSTOM DELAY
-			this.screensaverActivateAfterSeconds = this.myDelay;
-			}
-
-		// CHECKING IF A TEXT WASN'T DEFINED
-		if(typeof this.myText === "undefined")
-			{
-			// SETTING THE DEFAULT TEXT
-			this.myText = "Screensaver";
-			}
-
-		// CHECKING IF A FONT FAMILY WASN'T DEFINED
-		if(typeof this.myFontFamily === "undefined")
-			{
-			// SETTING THE DEFAULT FONT FAMILY
-			this.myFontFamily = "Arial";
-			}
-
-		// CHECKING IF A FONT SIZE WASN'T DEFINED
-		if(typeof this.myFontSize === "undefined")
-			{
-			// SETTING THE DEFAULT FONT SIZE
-			this.myFontSize = "72px";
-			}
-
-		// CHECKING IF A FONT COLOR WASN'T DEFINED
-		if(typeof this.myFontColor === "undefined")
-			{
-			// SETTING THE DEFAULT FONT COLOR
-			this.myFontColor = "#316faa";
-			}
-
-		// CHECKING IF A SHADOW COLOR WASN'T DEFINED
-		if(typeof this.myFontShadow === "undefined")
-			{
-			// SETTING THE DEFAULT SHADOW COLOR
-			this.myFontShadow = "#545454 4px 4px 4px";
-			}
-
-		// CREATING THE SCREENSAVER BACKGROUND WITH ALL THE PROPERTIES
-		this.myScreensaverBackground = document.createElement("div");
-		this.myScreensaverBackground.style.position = "fixed";
-		this.myScreensaverBackground.style.left = 0;
-		this.myScreensaverBackground.style.right = 0;
-		this.myScreensaverBackground.style.top = 0;
-		this.myScreensaverBackground.style.bottom = 0;
-		this.myScreensaverBackground.style.zIndex = 9999;
-		this.myScreensaverBackground.style.cursor = "none";
-		this.myScreensaverBackground.style.display = "none";
-		this.myScreensaverBackground.style.outline = "none";
-		this.myScreensaverBackground.style.backgroundColor = "black";
-		this.myScreensaverBackground.style.userSelect = "none";
-
-		// CREATING THE SCREENSAVER TEXT WITH ALL THE PROPERTIES
-		this.myScreensaverText = document.createElement("div");
-		this.myScreensaverText.style.position = "fixed";
-		this.myScreensaverText.style.fontFamily = this.myFontFamily;
-		this.myScreensaverText.style.fontWeight = "bold";
-		this.myScreensaverText.style.textAlign = "center";
-		this.myScreensaverText.style.fontSize = this.myFontSize;
-		this.myScreensaverText.style.color = this.myFontColor;
-		// CHECKING IF THE USER DOESN'T WANT A SHADOW COLOR
-		if (this.myFontShadow!=null)
-			{
-			this.myScreensaverText.style.textShadow = this.myFontShadow;
-			}
-		this.myScreensaverText.style.cursor = "none";
-		this.myScreensaverText.style.outline = "none";
-
-		// SETTING THE SCREENSAVER TEXT
-		this.myScreensaverText.innerHTML = this.myText;
-
-		// ADDING THE SCREENSAVER TEXT TO THE SCREENSAVER BACKGROUND
-		this.myScreensaverBackground.appendChild(this.myScreensaverText);
-
-		// ADDING THE SCREENSAVER BACKGROUND TO THE WEBSITE
-		document.getElementsByTagName("BODY")[0].appendChild(this.myScreensaverBackground);
 		}
 	}
