@@ -16,9 +16,9 @@ https://github.com/lrusso/Screensaver/blob/master/react/Screensaver.js
 
 ```
 const myScreensaver = new Screensaver({
-	secondsInactive: 5,
-	speed: 1.5,
-	logo: "logo.png",
+  secondsInactive: 5,
+  speed: 1.5,
+  logo: "logo.png",
   disabledWhenUsingIframes: true,
 });
 ```
