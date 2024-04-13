@@ -1,6 +1,6 @@
 # Screensaver
 
-Simple screensaver in JavaScript.
+Simple screensaver in React and Vanilla JavaScript.
 
 ![alt screenshot](https://raw.githubusercontent.com/lrusso/Screensaver/master/Screensaver.png)
 
