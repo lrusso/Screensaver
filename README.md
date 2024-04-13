@@ -23,7 +23,7 @@ const myScreensaver = new Screensaver({
 });
 ```
 
-## Using the screensaver - Vanilla JavaScript version:
+## Using the screensaver - React version:
 
 ```
 return (
